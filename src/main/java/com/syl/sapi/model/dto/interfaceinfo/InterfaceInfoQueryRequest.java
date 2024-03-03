@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 查询请求
  *
- * @author yupi
+ * @author lenovo
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

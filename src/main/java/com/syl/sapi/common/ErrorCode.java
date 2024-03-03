@@ -3,7 +3,7 @@ package com.syl.sapi.common;
 /**
  * 错误码
  *
- * @author yupi
+ * @author lenovo
  */
 public enum ErrorCode {
 

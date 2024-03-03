@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 /**
  * 用户服务测试
  *
- * @author yupi
+ * @author lenovo
  */
 @SpringBootTest
 class UserServiceTest {
@@ -47,31 +47,31 @@ class UserServiceTest {
 
     @Test
     void userRegister() {
-        String userAccount = "yupi";
+        String userAccount = "Zhangsan";
         String userPassword = "";
         String checkPassword = "123456";
         try {
             long result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
-            userAccount = "yu";
+            userAccount = "z";
             result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
-            userAccount = "yupi";
+            userAccount = "Zhangsan";
             userPassword = "123456";
             result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
-            userAccount = "yu pi";
+            userAccount = "Zhang san";
             userPassword = "12345678";
             result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
             checkPassword = "123456789";
             result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
-            userAccount = "dogYupi";
+            userAccount = "Lisi";
             checkPassword = "12345678";
             result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
-            userAccount = "yupi";
+            userAccount = "Zhagnsan";
             result = userService.userRegister(userAccount, userPassword, checkPassword);
             Assertions.assertEquals(-1, result);
         } catch (Exception e) {

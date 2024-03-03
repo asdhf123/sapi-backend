@@ -3,7 +3,7 @@ package com.syl.sapi.common;
 /**
  * 返回工具类
  *
- * @author yupi
+ * @author lenovo
  */
 public class ResultUtils {
 

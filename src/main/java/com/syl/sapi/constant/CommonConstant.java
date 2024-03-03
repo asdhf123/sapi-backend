@@ -3,7 +3,7 @@ package com.syl.sapi.constant;
 /**
  * 通用常量
  *
- * @author yupi
+ * @author lenovo
  */
 public interface CommonConstant {
 

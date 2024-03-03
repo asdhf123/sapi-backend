@@ -3,7 +3,7 @@ package com.syl.sapi.constant;
 /**
  * 用户常量
  *
- * @author yupi
+ * @author lenovo
  */
 public interface UserConstant {
 
