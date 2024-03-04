@@ -3,10 +3,7 @@ package com.syl.sapi.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.syl.sapi.annotation.AuthCheck;
-import com.syl.sapi.common.BaseResponse;
-import com.syl.sapi.common.DeleteRequest;
-import com.syl.sapi.common.ErrorCode;
-import com.syl.sapi.common.ResultUtils;
+import com.syl.sapi.common.*;
 import com.syl.sapi.constant.CommonConstant;
 import com.syl.sapi.exception.BusinessException;
 
@@ -15,9 +12,12 @@ import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.syl.sapi.model.entity.InterfaceInfo;
 import com.syl.sapi.model.entity.User;
+import com.syl.sapi.model.enums.InterfaceInfoStatusEnum;
 import com.syl.sapi.service.InterfaceInfoService;
 import com.syl.sapi.service.UserService;
+import com.syl.sapiclientsdk.client.SapiClient;
 import lombok.extern.slf4j.Slf4j;
+import nonapi.io.github.classgraph.json.Id;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +41,8 @@ public class InterfaceInfoController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private SapiClient sapiClient;
 
     // region 增删改查
 
@@ -196,5 +198,45 @@ public class InterfaceInfoController {
     }
 
     // endregion
+    @PostMapping("/online")
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest) {
+        Long id = idRequest.getId();
+        if(idRequest == null || id<0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //校验接口是否存在
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(id);
+        if(interfaceInfo == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        //校验接口是否可用
+        com.syl.sapiclientsdk.model.User user = new com.syl.sapiclientsdk.model.User("sss");
+        String username = sapiClient.getUsernameByPost(user);
+        if(StringUtils.isAllBlank(username)){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        //修改接口状态
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.ONLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
+
+    @PostMapping("/offline")
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                     HttpServletRequest request) {
+        Long id = idRequest.getId();
+        if(idRequest == null || id<0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //校验接口是否存在
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(id);
+        if(interfaceInfo == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        //修改接口状态
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
 
 }
