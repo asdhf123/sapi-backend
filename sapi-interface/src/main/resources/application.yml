@@ -1,0 +1,8 @@
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+sapi:
+  client:
+    access-key: Zhangsan
+    secret-key: 12345678
