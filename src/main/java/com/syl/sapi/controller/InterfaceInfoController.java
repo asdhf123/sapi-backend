@@ -2,6 +2,7 @@ package com.syl.sapi.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
 import com.syl.sapi.annotation.AuthCheck;
 import com.syl.sapi.common.*;
 import com.syl.sapi.constant.CommonConstant;
@@ -10,6 +11,7 @@ import com.syl.sapi.exception.BusinessException;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
+import com.syl.sapi.model.dto.interfaceinfo.InterfaceInvokeRequest;
 import com.syl.sapi.model.entity.InterfaceInfo;
 import com.syl.sapi.model.entity.User;
 import com.syl.sapi.model.enums.InterfaceInfoStatusEnum;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 帖子接口
@@ -199,6 +202,7 @@ public class InterfaceInfoController {
 
     // endregion
     @PostMapping("/online")
+    @AuthCheck(mustRole = "admin")
     public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest) {
         Long id = idRequest.getId();
         if(idRequest == null || id<0){
@@ -222,6 +226,7 @@ public class InterfaceInfoController {
     }
 
     @PostMapping("/offline")
+    @AuthCheck(mustRole = "admin")
     public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
                                                      HttpServletRequest request) {
         Long id = idRequest.getId();
@@ -237,6 +242,32 @@ public class InterfaceInfoController {
         interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getValue());
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
+    }
+    @PostMapping("/invoke")
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInvokeRequest interfaceInvokeRequest,
+                                                      HttpServletRequest request) {
+        Long id = interfaceInvokeRequest.getId();
+        if(interfaceInvokeRequest == null || id<0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //校验接口是否存在
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(id);
+        if(interfaceInfo == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        if(interfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getValue()){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"接口已关闭");
+        }
+        //调用接口
+        User loginUser = userService.getLoginUser(request);
+        String userRequestParams = interfaceInvokeRequest.getUserRequestParams();
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        SapiClient tempApiClient = new SapiClient(accessKey, secretKey);
+        Gson gson = new Gson();
+        com.syl.sapiclientsdk.model.User user = gson.fromJson(userRequestParams, com.syl.sapiclientsdk.model.User.class);
+        String usernameByPost = tempApiClient.getUsernameByPost(user);
+        return ResultUtils.success(usernameByPost);
     }
 
 }

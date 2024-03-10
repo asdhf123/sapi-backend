@@ -17,12 +17,13 @@
             <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
             <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="requestParams" column="requestParams" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,name,description,
         method,url,requestHeader,
         responseHeader,status,userId,
-        isDelete,createTime,updateTime
+        isDelete,createTime,updateTime,requestParams
     </sql>
 </mapper>
