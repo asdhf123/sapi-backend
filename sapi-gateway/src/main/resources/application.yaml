@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sapi-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: myRoute
+          uri: http://localhost:8123
+          predicates:
+            - Path=/api/name/**
