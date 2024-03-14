@@ -263,10 +263,11 @@ public class InterfaceInfoController {
         String userRequestParams = interfaceInvokeRequest.getUserRequestParams();
         String accessKey = loginUser.getAccessKey();
         String secretKey = loginUser.getSecretKey();
-        SapiClient tempApiClient = new SapiClient(accessKey, secretKey);
+        SapiClient tempApiClient = new SapiClient(accessKey,secretKey);
         Gson gson = new Gson();
+        //将获得的json串转为user对象
         com.syl.sapiclientsdk.model.User user = gson.fromJson(userRequestParams, com.syl.sapiclientsdk.model.User.class);
-        String usernameByPost = tempApiClient.getUsernameByPost(user);
+        String usernameByPost = sapiClient.getUsernameByPost(user);
         return ResultUtils.success(usernameByPost);
     }
 
