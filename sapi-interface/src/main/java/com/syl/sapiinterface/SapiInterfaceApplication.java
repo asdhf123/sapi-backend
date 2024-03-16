@@ -1,13 +1,13 @@
-package com.syl.sapigateway;
+package com.syl.sapiinterface;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SapiGatewayApplication {
+public class SapiInterfaceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SapiGatewayApplication.class, args);
+        SpringApplication.run(SapiInterfaceApplication.class, args);
     }
 
 }
