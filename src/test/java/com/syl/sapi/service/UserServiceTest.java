@@ -1,5 +1,6 @@
 package com.syl.sapi.service;
 
+import com.syl.sapicommon.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,11 +1,14 @@
 package com.syl.sapi.service;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.gson.Gson;
+import com.syl.sapi.mapper.InterfaceInfoMapper;
 import com.syl.sapiclientsdk.client.SapiClient;
 import com.syl.sapiclientsdk.model.User;
 
-import com.syl.sapicommon.service.UserInterfaceInfoService;
+
+import com.syl.sapicommon.model.entity.InterfaceInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +24,8 @@ public class UserInterfaceInfoServiceTest {
     private UserInterfaceInfoService userInterfaceInfoService;
     @Resource
     SapiClient sapiClient;
+    @Resource
+    InterfaceInfoMapper interfaceInfoMapper;
 
     @Test
     public void invokeCount() {
@@ -35,15 +40,11 @@ public class UserInterfaceInfoServiceTest {
     }
     @Test
     public void test(){
-        Gson gson = new Gson();
-        //将获得的json串转为user对象
-        String json = "{\"username\":\"jack\"}";
-        User1 user = gson.fromJson(json,User1.class);
-        System.out.println(user);
+        QueryWrapper<InterfaceInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",3);
+        InterfaceInfo interfaceInfo = interfaceInfoMapper.selectOne(queryWrapper);
+        System.out.println(interfaceInfo);
     }
 
 }
 
-class User1{
-    String username;
-}

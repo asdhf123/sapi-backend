@@ -1,7 +1,11 @@
 package com.syl.sapi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.syl.sapi.model.vo.InterfaceInfoVO;
+import com.syl.sapicommon.model.entity.InterfaceInfo;
 import com.syl.sapicommon.model.entity.UserInterfaceInfo;
+
+import java.util.List;
 
 
 /**
@@ -11,7 +15,12 @@ import com.syl.sapicommon.model.entity.UserInterfaceInfo;
 * @Entity generator.domain.UserInterfaceInfo
 */
 public interface UserInterfaceInfoMapper extends BaseMapper<UserInterfaceInfo> {
-
+    /**
+     * 查询top<limit>的接口和调用次数
+     * @param limit
+     * @return
+     */
+    List<UserInterfaceInfo> listTopInvokeInterfaceInfo(int limit);
 }
 
 
