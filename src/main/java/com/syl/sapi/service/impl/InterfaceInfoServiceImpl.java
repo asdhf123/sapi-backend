@@ -3,9 +3,9 @@ package com.syl.sapi.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.syl.sapi.common.ErrorCode;
 import com.syl.sapi.exception.BusinessException;
-import com.syl.sapi.model.entity.InterfaceInfo;
 import com.syl.sapi.mapper.InterfaceInfoMapper;
 import com.syl.sapi.service.InterfaceInfoService;
+import com.syl.sapicommon.model.entity.InterfaceInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

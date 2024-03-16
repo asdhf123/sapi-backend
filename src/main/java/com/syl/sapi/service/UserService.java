@@ -2,7 +2,7 @@ package com.syl.sapi.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.syl.sapi.model.entity.User;
+import com.syl.sapicommon.model.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 

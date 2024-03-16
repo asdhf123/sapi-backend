@@ -1,11 +1,11 @@
 package com.syl.sapi.aop;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.syl.sapi.model.entity.User;
 import com.syl.sapi.annotation.AuthCheck;
 import com.syl.sapi.common.ErrorCode;
 import com.syl.sapi.exception.BusinessException;
 import com.syl.sapi.service.UserService;
+import com.syl.sapicommon.model.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

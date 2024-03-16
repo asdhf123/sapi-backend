@@ -4,14 +4,16 @@ package com.syl.sapi.service;
 import com.google.gson.Gson;
 import com.syl.sapiclientsdk.client.SapiClient;
 import com.syl.sapiclientsdk.model.User;
-import org.junit.Assert;
+
+import com.syl.sapicommon.service.UserInterfaceInfoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
 import javax.annotation.Resource;
 
-import static org.junit.Assert.*;
+
 
 @SpringBootTest
 public class UserInterfaceInfoServiceTest {

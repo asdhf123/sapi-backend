@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.syl.sapi.common.ErrorCode;
 import com.syl.sapi.exception.BusinessException;
 import com.syl.sapi.mapper.UserInterfaceInfoMapper;
-import com.syl.sapi.model.entity.UserInterfaceInfo;
+
 import com.syl.sapi.service.UserInterfaceInfoService;
+
+import com.syl.sapicommon.model.entity.UserInterfaceInfo;
 
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,7 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
         }
 
     }
+
 
     /**
      * 用户调用接口统计数+1

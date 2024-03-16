@@ -1,7 +1,7 @@
 package com.syl.sapi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.syl.sapi.model.entity.UserInterfaceInfo;
+import com.syl.sapicommon.model.entity.UserInterfaceInfo;
 
 
 /**

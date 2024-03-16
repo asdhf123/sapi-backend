@@ -2,21 +2,19 @@ package com.syl.sapi.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.google.gson.Gson;
 import com.syl.sapi.annotation.AuthCheck;
 import com.syl.sapi.common.*;
 import com.syl.sapi.constant.CommonConstant;
 import com.syl.sapi.exception.BusinessException;
 
-import com.syl.sapi.model.dto.interfaceinfo.InterfaceInvokeRequest;
 import com.syl.sapi.model.dto.userinterfaceinfo.UserInterfaceInfoAddRequest;
 import com.syl.sapi.model.dto.userinterfaceinfo.UserInterfaceInfoQueryRequest;
 import com.syl.sapi.model.dto.userinterfaceinfo.UserInterfaceInfoUpdateRequest;
-import com.syl.sapi.model.entity.UserInterfaceInfo;
-import com.syl.sapi.model.entity.User;
 import com.syl.sapi.service.UserInterfaceInfoService;
 import com.syl.sapi.service.UserService;
-import com.syl.sapiclientsdk.client.SapiClient;
+import com.syl.sapicommon.model.entity.User;
+import com.syl.sapicommon.model.entity.UserInterfaceInfo;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

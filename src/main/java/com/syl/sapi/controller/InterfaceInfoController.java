@@ -12,14 +12,13 @@ import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.syl.sapi.model.dto.interfaceinfo.InterfaceInvokeRequest;
-import com.syl.sapi.model.entity.InterfaceInfo;
-import com.syl.sapi.model.entity.User;
 import com.syl.sapi.model.enums.InterfaceInfoStatusEnum;
 import com.syl.sapi.service.InterfaceInfoService;
 import com.syl.sapi.service.UserService;
 import com.syl.sapiclientsdk.client.SapiClient;
+import com.syl.sapicommon.model.entity.InterfaceInfo;
+import com.syl.sapicommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import nonapi.io.github.classgraph.json.Id;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 帖子接口
@@ -267,7 +265,7 @@ public class InterfaceInfoController {
         Gson gson = new Gson();
         //将获得的json串转为user对象
         com.syl.sapiclientsdk.model.User user = gson.fromJson(userRequestParams, com.syl.sapiclientsdk.model.User.class);
-        String usernameByPost = sapiClient.getUsernameByPost(user);
+        String usernameByPost = tempApiClient.getUsernameByPost(user);
         return ResultUtils.success(usernameByPost);
     }
 

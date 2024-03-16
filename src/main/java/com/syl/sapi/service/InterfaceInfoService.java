@@ -1,7 +1,7 @@
 package com.syl.sapi.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.syl.sapi.model.entity.InterfaceInfo;
+import com.syl.sapicommon.model.entity.InterfaceInfo;
 
 /**
 * @author lenovo
