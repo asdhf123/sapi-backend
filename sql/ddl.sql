@@ -36,3 +36,19 @@ create table if not exists sapi.`user_interface_info`
     `updateTime` datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     `isDelete` tinyint default 0 not null comment '是否删除(0-未删, 1-已删)'
 ) comment '用户调用接口关系';
+
+-- 产品信息
+create table if not exists sapi.product_info
+(
+    id             bigint auto_increment comment 'id' primary key,
+    name           varchar(256)                           not null comment '产品名称',
+    description    varchar(256)                           null comment '产品描述',
+    userId         bigint                                 null comment '创建人',
+    price          bigint                                 null comment '价格',
+    pointsNumber   bigint       default 0                 not null comment '对应积分数量',
+    status         tinyint      default 0                 not null comment '商品状态（0- 下线(默认) 1- 上线）',
+    createTime     datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime     datetime     default CURRENT_TIMESTAMP not null comment '更新时间',
+    isDelete       tinyint      default 0                 not null comment '是否删除'
+    )
+    comment '产品信息';
